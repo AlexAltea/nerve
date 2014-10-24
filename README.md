@@ -1,4 +1,4 @@
-nerve
+Nerve
 =====
 
-Front-end for PlayStation 3 debuggers
+Front-end for PlayStation 3 debuggers.

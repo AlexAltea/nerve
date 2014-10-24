@@ -32,14 +32,36 @@
                     </ul>
                 </div>
                 <div class="navbar-header pull-right">
-                    <form class="navbar-form navbar-right" role="form">
-                        <input type="url" placeholder="Server" class="form-control">
+                    <form id="nerve-server-form" class="navbar-form" onsubmit="connect()">
+                        <input id="nerve-server-addr" name="server" type="text" placeholder="Server" class="form-control">
                         <button type="submit" class="btn btn-success">Connect</button>
                     </form>
+                    <div id="nerve-server-status" class="navbar-nav" data-toggle="tooltip" data-placement="bottom">
+                    </div>
+                    <ul id="nerve-server-actions" class="nav navbar-nav" style="display: none">
+                        <li><a href="#" onclick="disconnect()"><span class="glyphicon glyphicon-off"></span></a></li>
+                    </ul>
                 </div>
             </div>
         </div>
 
+        <!-- Modal -->
+        <div class="modal fade">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">
+                            <span aria-hidden="true">&times;</span>
+                            <span class="sr-only">Close</span></button>
+                        <h4 class="modal-title"></h4>
+                    </div>
+                    <div class="modal-body"></div>
+                    <div class="modal-footer"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main container -->
         <div class="container">
             <div class="tab-content">
                 <!-- General -->
