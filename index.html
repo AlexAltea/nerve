@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Nerve</title>
+
+        <!-- External stylesheets -->
+        <link href="externals/css/bootstrap.min.css" rel="stylesheet">
+
+        <!-- External fonts -->
+        <link href="http://fonts.googleapis.com/css?family=Roboto+Condensed:300italic,400italic,700italic,400,300,700" rel="stylesheet">
+
+        <!-- External scripts -->
+        <script src="externals/js/less.min.js"></script>
+
+        <!-- Nerve -->
+        <link href="css/nerve.css" rel="stylesheet">
+    </head>
+
+    <body>
+        <!-- Navbar -->
+        <div class="navbar navbar-fixed-top" role="navigation">
+            <div class="container">
+                <div class="navbar-header pull-left">
+                    <a class="navbar-brand" href="#">NERVE</a>
+                    <ul class="nav navbar-nav">
+                        <li><a href="#general" role="tab" data-toggle="tab">General</a></li>
+                        <li><a href="#cpu" role="tab" data-toggle="tab">CPU</a></li>
+                        <li><a href="#gpu" role="tab" data-toggle="tab">GPU</a></li>
+                        <li><a href="#memory" role="tab" data-toggle="tab">Memory</a></li>
+                        <li><a href="#files" role="tab" data-toggle="tab">Files</a></li>
+                        <li><a href="#system" role="tab" data-toggle="tab">System</a></li>
+                    </ul>
+                </div>
+                <div class="navbar-header pull-right">
+                    <form class="navbar-form navbar-right" role="form">
+                        <input type="url" placeholder="Server" class="form-control">
+                        <button type="submit" class="btn btn-success">Connect</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="tab-content">
+                <!-- General -->
+                <div class="tab-pane" id="general">
+                </div>
+
+                <!-- CPU -->
+                <div class="tab-pane" id="cpu">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div class="widget">
+                                <div class="widget-title">Disassembler</div>
+                                <div class="widget-content">
+                                    Test
+                                </div>
+                            </div>
+                            <div class="widget">
+                                <div class="widget-title">Memory</div>
+                                <div class="widget-content">
+                                    Test
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="widget">
+                                <div class="widget-title">Registers</div>
+                                <div class="widget-content">
+                                    Test
+                                </div>
+                            </div>
+                            <div class="widget">
+                                <div class="widget-title">Stack</div>
+                                <div class="widget-content">
+                                    Test
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- GPU -->
+                <div class="tab-pane" id="gpu">
+                </div>
+
+                <!-- Memory -->
+                <div class="tab-pane" id="memory">
+                </div>
+
+                <!-- Files -->
+                <div class="tab-pane" id="files">
+                </div>
+
+                <!-- System -->
+                <div class="tab-pane" id="system">
+                </div>
+            </div>
+        </div>
+
+        <!-- Externals -->
+        <script src="externals/js/jquery.min.js"></script>
+        <script src="externals/js/angular.min.js"></script>
+        <script src="externals/js/bootstrap.min.js"></script>
+
+        <!-- Nerve -->
+        <script src="js/ui.js"></script>
+        <script src="js/nerve.js"></script>
+    </body>
+</html>

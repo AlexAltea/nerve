@@ -1,0 +1,35 @@
+/* Navbar */
+.navbar {
+    border: 0px;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.8) 100%);*/
+    color: #fff;
+    font-family: "Roboto Condensed", sans-serif, bold;
+    font-weight: 400;
+    font-size: 16px;
+}
+
+.nav > li > a {
+    color: #eee;
+}
+
+.navbar-brand {
+    color: #fff;
+    font-weight: 700;
+    font-size: 18px;
+}
+
+/* Body */
+body > .container {
+    margin-top: 60px;
+}
+
+/* Widgets */
+.widget-title {
+    font-family: "Roboto Condensed", sans-serif, bold;
+    font-weight: 400;
+    font-size: 24px;
+}
+
+.widget-content {
+    background-color: #eee;
+}
