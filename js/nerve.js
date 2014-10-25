@@ -11,13 +11,12 @@ Nerve = {};
 function connect(server) {
     
     // Get and server address
-    if (!server) {
-        server = $("#nerve-server-addr").val().trim();
-    }
     server = server.trim();
     if (!(/^http/).test(server)) {
         server = "http://" + server;
     }
+    
+    $("#nerve-server-btn").html("<div class='loader'>Loading...</div>");
     
     // Connect to server
     $.getJSON(server + "/connect", function(data) {
@@ -32,6 +31,7 @@ function connect(server) {
         
         // Replace form with server information
         var ipPort = server.replace("http://", "").replace("/", "");
+        $("#nerve-server-btn").html("Connect...");
         $("#nerve-server-form").hide();
         $("#nerve-server-status").html("Connected to: <i>" + ipPort + "</i>");
         $("#nerve-server-status").attr('data-original-title', serverTooltip);
@@ -43,6 +43,7 @@ function connect(server) {
         Nerve.server = server;
         
     }).error(function(){
+        $("#nerve-server-btn").html("Connect...");
         showModal({
             title: "Connection error",
             body: "<p>Could not connect to the specified Nerve back-end server. " +
@@ -71,6 +72,18 @@ $(document).ready(function() {
     
     // Activate Bootstrap components
     $("[data-toggle=tooltip]").tooltip({container: 'body', html: true});
+    
+    // Events
+    $("#nerve-server-form").submit(function() {
+        connect($("#nerve-server-addr").val());
+        return false;
+    });
+    $('.disabled').click(function() { 
+        return false;
+    });
+    
+    // UI
+    initRegisters();
     
     // Debugging purposes
     //connect("127.0.0.1");

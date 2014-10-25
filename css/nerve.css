@@ -31,11 +31,30 @@
     background: #5D5F60;
 }
 
+.nav > li > .disabled {
+    color: #888;
+    cursor: default;
+}
+
 /**
  * Body
  */
-body > .container {
-    margin-top: 60px;
+html {
+    height: 100%;
+}
+
+body {
+    margin-top: 50px;
+    height: calc(100% - 50px);
+}
+
+/**
+ * Jumbotron
+ */
+.jumbotron {
+    background-image: url('../images/background.jpg');
+    background-size: 100%;
+    color: #eee;
 }
 
 /**

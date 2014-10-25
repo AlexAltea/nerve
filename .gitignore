@@ -1,2 +1,5 @@
 # AngularJS
 *.map
+
+# Images
+*.psd
