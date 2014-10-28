@@ -8,6 +8,7 @@
 
         <!-- External fonts -->
         <link href="http://fonts.googleapis.com/css?family=Roboto+Condensed:300italic,400italic,700italic,400,300,700" rel="stylesheet">
+        <link href='http://fonts.googleapis.com/css?family=Inconsolata:400,700' rel='stylesheet' type='text/css'>
 
         <!-- External scripts -->
         <script src="externals/js/less.min.js"></script>
@@ -22,8 +23,8 @@
         <div class="navbar navbar-fixed-top" role="navigation">
             <div class="container">
                 <div class="navbar-header pull-left">
-                    <a href="#nerve" class="navbar-brand" data-toggle="tab">NERVE</a>
                     <ul class="nav navbar-nav">
+                        <li><a href="#intro" class="navbar-brand" role="tab" data-toggle="tab">NERVE</a></li>
                         <li><a href="#general" class="disabled" role="tab" data-toggle="tab">General</a></li>
                         <li><a href="#cpu" role="tab" data-toggle="tab">CPU</a></li>
                         <li><a href="#gpu" class="disabled" role="tab" data-toggle="tab">GPU</a></li>
@@ -65,103 +66,47 @@
         </div>
 
         <!-- Main container -->
-        <div class="tab-content">
+        <div class="tab-content" data-ng-app="Nerve">
+            
             <!-- Nerve -->
-            <div class="tab-pane active" id="nerve">
-                <div class="jumbotron">
-                    <div class="container">
-                        <h1>Nerve</h1>
-                        <p>An online front-end for PlayStation 3 debuggers.</p>
-                    </div>
-                </div>
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-4">
-                            <h2>Connection</h2>
-                            <p>Enter the address of the debugger back-end server in the top right corner to enable all the debugging features. All interaction with the device goes through the RESTful API the back-end server offers.</p>
-                            <p>Remember to enter the server's address in the <b>IP:Port</b> format (e.g. <i>127.0.0.1:8080</i>).</p>
-                        </div>
-                        <div class="col-md-4">
-                            <h2>Features</h2>
-                            <p>At the moment, Nerve is far from finished and the only back-end available for it is the PS3 emulator <a href="https://github.com/AlexAltea/nucleus">Nucleus</a>. These are the offered debugging features:</p>
-                            <ul>
-                                <li>Integer tempor dapibus dolor.</li>
-                                <li>Quisque sed ante sed velit scelerisque.</li>
-                                <li>Lorem ipsum dolor sit amet.</li>
-                                <li>Consectetur adipiscing elit.</li>
-                            </ul>
-                        </div>
-                        <div class="col-md-4">
-                            <h2>Goals</h2>
-                            <p>For receiving news about Nerve and accessing its source code and API documentation, visit <a href="https://github.com/AlexAltea/nerve">Nerve's repo</a>. These are the features I have planned:</p>
-                            <ul>
-                                <li>Lorem ipsum dolor sit amet.</li>
-                                <li>Consectetur adipiscing elit.</li>
-                                <li>Quisque sed ante sed velit scelerisque.</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
+            <div class="tab-pane active" id="intro">
+                <div data-ng-include="'nerve/intro.html'"></div>
             </div>
 
             <!-- General -->
-            <div class="tab-pane container" id="general">
+            <div class="tab-pane" id="general">
+                <div class="container" data-ng-include="'nerve/general.html'"></div>
             </div>
 
             <!-- CPU -->
-            <div class="tab-pane container" id="cpu">
-                <div class="row">
-                    <div class="col-md-8">
-                        <div class="widget">
-                            <div class="widget-title">Disassembler</div>
-                            <div class="widget-content">
-                                Test
-                            </div>
-                        </div>
-                        <div class="widget">
-                            <div class="widget-title">Memory</div>
-                            <div class="widget-content">
-                                Test
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="widget nerve-cpu-registers">
-                            <div class="widget-title">Registers</div>
-                            <div class="widget-content">
-                                Test
-                            </div>
-                        </div>
-                        <div class="widget">
-                            <div class="widget-title">Stack</div>
-                            <div class="widget-content">
-                                Test
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <div class="tab-pane" id="cpu" data-ng-controller="cpuController" >
+                <div class="container" data-ng-include="'nerve/cpu.html'"></div>
             </div>
 
             <!-- GPU -->
-            <div class="tab-pane container" id="gpu">
+            <div class="tab-pane" id="gpu">
+                <div class="container" data-ng-include="'nerve/gpu.html'"></div>
             </div>
 
             <!-- Memory -->
-            <div class="tab-pane container" id="memory">
+            <div class="tab-pane" id="memory">
+                <div class="container" data-ng-include="'nerve/memory.html'"></div>
             </div>
 
             <!-- Files -->
-            <div class="tab-pane container" id="files">
+            <div class="tab-pane" id="files">
+                <div class="container" data-ng-include="'nerve/files.html'"></div>
             </div>
 
             <!-- System -->
-            <div class="tab-pane container" id="system">
+            <div class="tab-pane" id="system">
+                <div class="container" data-ng-include="'nerve/system.html'"></div>
             </div>
         </div>
 
+        <hr/>
 
         <footer class="container">
-            <hr/>
             <p>&copy; Alexandro S&aacute;nchez, 2014</p>
         </footer>
 
@@ -169,6 +114,7 @@
         <script src="externals/js/jquery.min.js"></script>
         <script src="externals/js/angular.min.js"></script>
         <script src="externals/js/bootstrap.min.js"></script>
+        <script src="externals/js/angular-ui-bootstrap.min.js"></script>
 
         <!-- Nerve -->
         <script src="js/ui.js"></script>

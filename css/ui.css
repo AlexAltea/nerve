@@ -41,3 +41,29 @@
         transform: rotate(360deg);
     }
 }
+
+/**
+ * Widgets
+ */
+.widget-title {
+    font-family: "Roboto Condensed", sans-serif, bold;
+    font-weight: 400;
+    font-size: 20px;
+}
+
+.widget-toolbar {
+    padding: 3px;
+    height: 36px;
+    background-color: #ccc;
+}
+
+.widget-input > .form-control {
+    font-family: 'Inconsolata';
+    font-size: 14px;
+    width: 80px;
+}
+
+.widget-content {
+    padding: 5px;
+    background-color: #eee;
+}

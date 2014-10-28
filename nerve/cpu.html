@@ -1,0 +1,79 @@
+<div class="row">
+    <div class="col-md-8">
+        <div class="widget nerve-cpu-disassembler">
+            <div class="widget-title">Disassembler</div>
+            <div class="widget-toolbar">
+                <div class="widget-input input-group input-group-sm">
+                    <span class="input-group-addon">Address</span>
+                    <input type="text" class="form-control" ng-model="memory.addr" ng-maxlength="8" maxlength="8">
+                </div>
+            </div>
+            <div class="widget-content">
+                <table>
+                    <tr data-ng-repeat="line in disassembler.lines()">
+                        <td>{{ line.breakpoint }}</td>
+                        <td>{{ line.addr }}</td>
+                        <td>{{ line.value }}</td>
+                        <td>{{ line.instruction }}</td>
+                        <td>{{ line.comment }}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="widget">
+            <div class="widget-title">Memory</div>
+            <div class="widget-toolbar">
+                <div class="widget-input input-group input-group-sm">
+                    <span class="input-group-addon">Address</span>
+                    <input type="text" class="form-control" ng-model="memory.addr" ng-maxlength="8" maxlength="8">
+                </div>
+            </div>
+            <div class="widget-content">
+                Test
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="widget nerve-cpu-registers">
+            <div class="widget-title">Registers</div>
+            <div class="widget-toolbar">
+                <div class="widget-input btn-group btn-group-sm">
+                    <label class="btn btn-default" ng-model="radioModel" btn-radio="'Left'" uncheckable>Integer</label>
+                    <label class="btn btn-default" ng-model="radioModel" btn-radio="'Middle'" uncheckable>Float</label>
+                    <label class="btn btn-default" ng-model="radioModel" btn-radio="'Right'" uncheckable>Vector</label>
+                </div>
+            </div>
+            <div class="widget-content">
+                <div class="row">
+                    <div class="col-md-6">
+                        <table>
+                            <tr data-ng-repeat="reg in registers.slice(0,16)">
+                                <td>{{ reg.name }}</td><td>{{ reg.value }}</td>
+                            </tr>
+
+                        </table>
+                    </div>
+                    <div class="col-md-6">
+                        <table>
+                            <tr data-ng-repeat="reg in registers.slice(16,32)">
+                                <td>{{ reg.name }}</td><td>{{ reg.value }}</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="widget">
+            <div class="widget-title">Stack</div>
+            <div class="widget-toolbar">
+                <div class="widget-input input-group input-group-sm">
+                    <span class="input-group-addon">Address</span>
+                    <input type="text" class="form-control" ng-model="memory.addr" ng-maxlength="8" maxlength="8">
+                </div>
+            </div>
+            <div class="widget-content">
+                Test
+            </div>
+        </div>
+    </div>
+</div>

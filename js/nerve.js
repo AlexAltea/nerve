@@ -86,5 +86,45 @@ $(document).ready(function() {
     initRegisters();
     
     // Debugging purposes
-    //connect("127.0.0.1");
+    connect("127.0.0.1");
+    $("#cpu").tab("show");
+});
+
+/**
+ * Nerve
+ */
+function valueToHex(value, bytes) {
+    return ("0000000000000000" + value.toString(16).toUpperCase()).substr(-bytes*2); 
+}
+
+var app = angular.module("Nerve", []);
+
+app.controller("cpuController", function($scope) {
+    // Disassembler
+    $scope.disassembler = {
+        addr : 0x00000000,
+        
+        lines : function () {
+            var lines = [];
+            for (var i=0; i<16; i++) {
+                lines.push({
+                    breakpoint : "",
+                    addr : valueToHex($scope.disassembler.addr + 4*i, 4),
+                    value : "????????",
+                    instruction : "????????",
+                    comment : ""
+                });
+            }
+            return lines;
+        }
+    };
+
+    
+    
+    
+    // Registers
+    $scope.registers = [];
+    for (var i=0; i<32; i++) $scope.registers.push({ "name" : "r" +i, "value" : "????????????????" });
+    for (var i=0; i<32; i++) $scope.registers.push({ "name" : "fr"+i, "value" : "????????????????" });
+    for (var i=0; i<32; i++) $scope.registers.push({ "name" : "v" +i, "value" : "???????? ???????? ???????? ????????" });
 });
