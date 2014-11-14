@@ -86,8 +86,7 @@ $(document).ready(function() {
     initRegisters();
     
     // Debugging purposes
-    connect("127.0.0.1");
-    $("#cpu").tab("show");
+    //connect("127.0.0.1");
 });
 
 /**

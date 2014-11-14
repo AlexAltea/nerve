@@ -47,9 +47,8 @@ body {
     margin-top: 50px;
     height: calc(100% - 50px);
     overflow-y: hidden;
-    font-family: "Roboto Condensed", sans-serif, bold;
+    font-family: "Roboto Condensed", sans-serif;
     font-size: 16px;
-    font-weight: 300;
 }
 
 /**
