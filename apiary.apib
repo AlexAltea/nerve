@@ -1,19 +1,249 @@
 FORMAT: 1A
 
-# Nerve
-Nerve API Documentation.
+# Nerve API Documentation
+The Nerve API is based on REST principles and its goal is to provide a simple yet powerful way to interact with the LV2 system of the PlayStation 3 (both real consoles and emulators). An official [Nerve client](http://alexaltea.github.io/nerve/) is available. The back-end server has to match the specifications of this document, an example of such a server can be found in the [Nucleus](https://github.com/AlexAltea/nucleus) emulator.
+
+##Allowed HTTP requests:
+- `POST` - Creates or updates a resource.
+- `PUT` - Updates a resource.
+- `GET` - Retrieves a resource or list of resources.
+- `DELETE` - Delete a resource.
+
+##Typical server responses
+- `200` *OK* - The request was successful.
+- `201` *Created* - The request was successful and a resource was created.
+- `204` *No Content* - The request was successful and there is nothing to return.
+- `400` *Bad Request* - The request could not be understood or was missing required parameters.
+- `404` *Not Found* - Resource was not found.
+
+# Group Nerve
+Control the back-end server itself.
+
+## Connection [/connect]
+Since the back-end server runs a RESTful API, no real connections take place here. The purpose of this method is validating and obtaining information about the back-end server for the client.
+
+### Connect to the back-end [GET]
++ Response 200 (application/json)
+
+        {
+          "version": "1.0.0",
+          "device": {
+            "name": "Nucleus",
+            "type": "emulator",
+            "version": "0.0.1"
+          },
+          "host": {
+            "os": "Windows 7 SP1",
+            "cpu": "64-bit"
+          }
+        }
+
 
 # Group CPU
-Blah.
+Controls the *Cell B.E.* processor. It provides a list of threads in the current process and allows to read/write their registers.
+
+## Threads Collection [/cpu/threads]
+Provides general information and IDs of all threads, and allows to create new ones.
+
+### List all threads [GET]
+Provides a list of threads managed by LV2 in the current process, along with following information:
+- **id**: Unique 64-bit identifier of the thread.
+- **type**: Allowed values: `PPU`, `SPU`, `RAWSPU`.
+- **name**: Name of the thread.
+- **state**: Allowed values for *PPU* threads are: `IDLE`, `RUNNABLE`, `RUNNING`, `SLEEPING`, `STOPPED`, `ZOMBIE`, `DELETED`, `UNKNOWN`.
+
++ Response 200 (application/json)
+
+        [{
+          "id": 1,
+          "type": "PPU",
+          "name": "MainThread",
+          "state": "RUNNING",
+        }, {
+          "id": 2,
+          "type": "PPU",
+          "name": "WorkerThread",
+          "state": "RUNNING",
+        }, {
+          "id": 3,
+          "type": "SPU",
+          "name": "",
+          "state": "SLEEPING",
+        }, {
+          "id": 5,
+          "type": "RAWSPU",
+          "name": "VideoDecoder",
+          "state": "ZOMBIE",
+        }]
+
+### Create a thread [POST]
+Creates a thread via LV2, requiring following arguments:
+- **type**: Allowed values: `PPU`, `SPU`, `RAWSPU`.
+- **function**: Address of the function's OPD as decimal number.
+- **argument**: Argument to be passed to the function.
+
++ Request (application/json)
+
+        {
+          "type": "PPU",
+          "name": "NewThread",
+          "function": 65792,
+          "argument": 1234,
+        }
+
++ Response 201 (application/json)
+
+        {
+          "id": 3,
+          "type": "PPU",
+          "name": "NewThread",
+          "state": "RUNNABLE",
+        }
+
+## Threads [/cpu/threads/{id}]
+A single thread object with all its properties. Registers will be passed as strings containing the hexadecimal value without the *0x* prefix.
+
++ Parameters
+    + id (required, number, `1`) ... Numeric `id` of the thread to interact with.
+
+### Retrieve a thread [GET]
++ Response 200 (application/json)
+
+        {
+          "id": 2,
+          "type": "PPU",
+          "name": "SomeThread",
+          "state": "IDLE",
+          "registers" : {
+            "gpr": [
+              "0000000000000000",
+              "0000000000000000",
+              "0000000012345678",
+              "00000000D000E580",
+              "0000000000000000",
+              "0000000000000000",
+              "0000000000000000",
+              "0000000000000000",
+              "0000000000000000",
+              "0000000000000000",
+              "0000000000000000",
+              "0000000000000000",
+              "0000000000000000",
+              "0000000000000000",
+              "0000000000000000",
+              "0000000000000000",
+              "0000000000000000",
+              "0000000000000000",
+              "0000000000000000",
+              "0000000000000000",
+              "0000000000000000",
+              "0000000000000000",
+              "0000000000000000",
+              "0000000000000000",
+              "0000000000000000",
+              "0000000000000000",
+              "0000000000000000",
+              "0000000000000000",
+              "0000000000000000",
+              "0000000000000000",
+              "0000000000000000",
+              "0000000000000000"
+            ],
+            "fpr": [
+              "0000000000000000",
+              "0000000000000000",
+              "0000000000000000",
+              "0000000000000000",
+              "0000000000000000",
+              "0000000000000000",
+              "0000000000000000",
+              "0000000000000000",
+              "0000000000000000",
+              "0000000000000000",
+              "0000000000000000",
+              "0000000000000000",
+              "0000000000000000",
+              "0000000000000000",
+              "0000000000000000",
+              "0000000000000000",
+              "0000000000000000",
+              "0000000000000000",
+              "0000000000000000",
+              "0000000000000000",
+              "0000000000000000",
+              "0000000000000000",
+              "0000000000000000",
+              "0000000000000000",
+              "0000000000000000",
+              "0000000000000000",
+              "0000000000000000",
+              "0000000000000000",
+              "0000000000000000",
+              "0000000000000000",
+              "0000000000000000",
+              "0000000000000000"
+            ],
+            "vr": [
+              "00000000000000000000000000000000",
+              "00000000000000000000000000000000",
+              "00000000000000000000000000000000",
+              "00000000000000000000000000000000",
+              "00000000000000000000000000000000",
+              "00000000000000000000000000000000",
+              "00000000000000000000000000000000",
+              "00000000000000000000000000000000",
+              "00000000000000000000000000000000",
+              "00000000000000000000000000000000",
+              "00000000000000000000000000000000",
+              "00000000000000000000000000000000",
+              "00000000000000000000000000000000",
+              "00000000000000000000000000000000",
+              "00000000000000000000000000000000",
+              "00000000000000000000000000000000",
+              "00000000000000000000000000000000",
+              "00000000000000000000000000000000",
+              "00000000000000000000000000000000",
+              "00000000000000000000000000000000",
+              "00000000000000000000000000000000",
+              "00000000000000000000000000000000",
+              "00000000000000000000000000000000",
+              "00000000000000000000000000000000",
+              "00000000000000000000000000000000",
+              "00000000000000000000000000000000",
+              "00000000000000000000000000000000",
+              "00000000000000000000000000000000",
+              "00000000000000000000000000000000",
+              "00000000000000000000000000000000",
+              "00000000000000000000000000000000",
+              "00000000000000000000000000000000"
+            ],
+            "cr": "00000000",
+            "fpscr": "00000000",
+            "vscr": "00000000",
+            "xer": "00000000",
+            "lr": "00000000",
+            "ctr": "00000000",
+            "pc": "00000000",
+            "tbl": "00000000",
+            "tbu": "00000000"
+          }
+        }
+
+### Remove a thread [DELETE]
++ Response 204
+
 
 # Group GPU
-Blah.
+Controls the *Reality Synthesizer* (RSX). It provides information about used display buffers, the FIFO command buffer, reports, notifiers, fragment/vertex shaders and more.
+
 
 # Group Memory
-Blah.
+Provides additional information and statistics about the memory usage of the current process.
+
 
 # Group Files
 Blah.
+
 
 # Group System
 Blah.
