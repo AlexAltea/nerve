@@ -43,6 +43,50 @@
 }
 
 /**
+ * Static text box for the Bootstrap btn-group's
+ * Equivalent to .input-group-addon
+ */
+.btn-group-sm > .btn-group-addon {
+    padding: 5px 10px;
+    font-size: 12px;
+    line-height: 1.5;
+    border-radius: 3px;
+}
+
+.btn-group > .btn-group-addon {
+    position: relative;
+    float: left;
+}
+.btn-group-addon {
+    white-space: nowrap;
+    vertical-align: middle;
+    display: table-cell;
+    padding: 6px 12px;
+    font-size: 14px;
+    font-weight: normal;
+    line-height: 1;
+    color: #555;
+    text-align: center;
+    background-color: #eee;
+    border: 0px solid #ccc;
+    margin: 1px 0px 1px 1px;
+    border-radius: 4px;
+}
+.btn-group-addon:not(:first-child):not(:last-child) {
+    border-radius: 0;
+}
+.btn-group-addon:first-child {
+    border-right: 0;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+.btn-group-addon:last-child {
+    border-left: 0;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+/**
  * Widgets
  */
 .widget-title {

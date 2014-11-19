@@ -24,13 +24,13 @@
             <div class="container">
                 <div class="navbar-header pull-left">
                     <ul class="nav navbar-nav">
-                        <li><a href="#intro" class="navbar-brand" role="tab" data-toggle="tab">NERVE</a></li>
-                        <li><a href="#general" class="disabled" role="tab" data-toggle="tab">General</a></li>
-                        <li><a href="#cpu" role="tab" data-toggle="tab">CPU</a></li>
-                        <li><a href="#gpu" class="disabled" role="tab" data-toggle="tab">GPU</a></li>
-                        <li><a href="#memory" class="disabled" role="tab" data-toggle="tab">Memory</a></li>
-                        <li><a href="#files" class="disabled" role="tab" data-toggle="tab">Files</a></li>
-                        <li><a href="#system" class="disabled" role="tab" data-toggle="tab">System</a></li>
+                        <li><a id="tab-intro" href="#intro" class="navbar-brand" role="tab" data-toggle="tab">NERVE</a></li>
+                        <li><a id="tab-general" href="#general" role="tab" data-toggle="tab">General</a></li>
+                        <li><a id="tab-cpu" href="#cpu" role="tab" data-toggle="tab">CPU</a></li>
+                        <li><a id="tab-gpu" href="#gpu" role="tab" data-toggle="tab">GPU</a></li>
+                        <li><a id="tab-memory" href="#memory" role="tab" data-toggle="tab">Memory</a></li>
+                        <li><a id="tab-files" href="#files" role="tab" data-toggle="tab">Files</a></li>
+                        <li><a id="tab-system" href="#system" role="tab" data-toggle="tab">System</a></li>
                     </ul>
                 </div>
                 <div class="navbar-header pull-right">
@@ -43,7 +43,7 @@
                     <div id="nerve-server-status" class="navbar-nav" data-toggle="tooltip" data-placement="bottom">
                     </div>
                     <ul id="nerve-server-actions" class="nav navbar-nav" style="display: none">
-                        <li><a href="#" onclick="disconnect()"><span class="glyphicon glyphicon-off"></span></a></li>
+                        <li><a href="#" onclick="Nerve.disconnect()"><span class="glyphicon glyphicon-off"></span></a></li>
                     </ul>
                 </div>
             </div>
@@ -66,55 +66,38 @@
         </div>
 
         <!-- Main container -->
-        <div class="tab-content" data-ng-app="Nerve">
-            
+        <div class="tab-content">
             <!-- Nerve -->
-            <div class="tab-pane active" id="intro">
-                <div data-ng-include="'nerve/intro.html'"></div>
-            </div>
+            <div class="tab-pane active" id="intro"></div>
 
             <!-- General -->
-            <div class="tab-pane" id="general">
-                <div class="container" data-ng-include="'nerve/general.html'"></div>
-            </div>
+            <div class="tab-pane container" id="general"></div>
 
             <!-- CPU -->
-            <div class="tab-pane" id="cpu" data-ng-controller="cpuController" >
-                <div class="container" data-ng-include="'nerve/cpu.html'"></div>
-            </div>
+            <div class="tab-pane container" id="cpu"></div>
 
             <!-- GPU -->
-            <div class="tab-pane" id="gpu">
-                <div class="container" data-ng-include="'nerve/gpu.html'"></div>
-            </div>
+            <div class="tab-pane container" id="gpu"></div>
 
             <!-- Memory -->
-            <div class="tab-pane" id="memory">
-                <div class="container" data-ng-include="'nerve/memory.html'"></div>
-            </div>
+            <div class="tab-pane container" id="memory"></div>
 
             <!-- Files -->
-            <div class="tab-pane" id="files">
-                <div class="container" data-ng-include="'nerve/files.html'"></div>
-            </div>
+            <div class="tab-pane container" id="files"></div>
 
             <!-- System -->
-            <div class="tab-pane" id="system">
-                <div class="container" data-ng-include="'nerve/system.html'"></div>
-            </div>
+            <div class="tab-pane container" id="system"></div>
         </div>
 
         <hr/>
 
         <footer class="container">
-            <p>&copy; Alexandro S&aacute;nchez, 2014</p>
+            <p style="color: #666; font-weight: 300">&copy; Alexandro S&aacute;nchez Bach, 2014</p>
         </footer>
 
         <!-- Externals -->
         <script src="externals/js/jquery.min.js"></script>
-        <script src="externals/js/angular.min.js"></script>
         <script src="externals/js/bootstrap.min.js"></script>
-        <script src="externals/js/angular-ui-bootstrap.min.js"></script>
 
         <!-- Nerve -->
         <script src="js/ui.js"></script>

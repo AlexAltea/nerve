@@ -1,4 +1,29 @@
-<div class="row">
+<script src="js/cpu.js"></script>
+
+<div class="btn-toolbar widget-toolbar">
+    <div class="widget-input btn-group btn-group-sm">
+        <label class="btn-group-addon">Cell</label>
+        <label class="btn btn-default">Run</label>
+        <label class="btn btn-default">Stop</label>
+        <label class="btn btn-default">Restart</label>
+    </div>
+    <div  class="widget-input btn-group btn-group-sm">
+        <label class="btn-group-addon">Thread</label>
+        <div id="nerve-cpu-threads-selector" class="btn-group btn-group-sm" role="group">
+            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                <i>Select thread</i> <span class="caret"></span>
+            </button>
+            <ul id="nerve-cpu-threads-list" class="dropdown-menu" role="menu">
+                <li><a>Loading...</a></li>
+            </ul>
+        </div>
+        <label class="btn btn-default">Run</label>
+        <label class="btn btn-default">Stop</label>
+        <label class="btn btn-default">Restart</label>
+    </div>
+</div>
+
+<div>
     <div class="col-md-8">
         <div class="widget nerve-cpu-disassembler">
             <div class="widget-title">Disassembler</div>

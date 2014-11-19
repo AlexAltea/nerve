@@ -58,22 +58,22 @@ Provides a list of threads managed by LV2 in the current process, along with fol
           "id": 1,
           "type": "PPU",
           "name": "MainThread",
-          "state": "RUNNING",
+          "state": "RUNNING"
         }, {
           "id": 2,
           "type": "PPU",
           "name": "WorkerThread",
-          "state": "RUNNING",
+          "state": "RUNNING"
         }, {
           "id": 3,
           "type": "SPU",
           "name": "",
-          "state": "SLEEPING",
+          "state": "SLEEPING"
         }, {
           "id": 5,
           "type": "RAWSPU",
           "name": "VideoDecoder",
-          "state": "ZOMBIE",
+          "state": "ZOMBIE"
         }]
 
 ### Create a thread [POST]
@@ -88,7 +88,7 @@ Creates a thread via LV2, requiring following arguments:
           "type": "PPU",
           "name": "NewThread",
           "function": 65792,
-          "argument": 1234,
+          "argument": 1234
         }
 
 + Response 201 (application/json)
@@ -97,7 +97,7 @@ Creates a thread via LV2, requiring following arguments:
           "id": 3,
           "type": "PPU",
           "name": "NewThread",
-          "state": "RUNNABLE",
+          "state": "RUNNABLE"
         }
 
 ## Threads [/cpu/threads/{id}]

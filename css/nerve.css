@@ -72,6 +72,10 @@ body {
     display: none;
 }
 
+.tab-content > .container {
+    padding: 0px;
+}
+
 /**
  * CPU
  */
