@@ -1,5 +1,12 @@
+# NPM and TSD dependencies
+node_modules/
+typings/
+
 # AngularJS
 *.map
 
 # Images
 *.psd
+
+# Nerve
+dist/

@@ -1,21 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="nerve">
     <head>
         <title>Nerve</title>
-
-        <!-- External stylesheets -->
-        <link href="externals/css/bootstrap.min.css" rel="stylesheet">
 
         <!-- External fonts -->
         <link href="http://fonts.googleapis.com/css?family=Roboto+Condensed:300italic,400italic,700italic,400,300,700" rel="stylesheet">
         <link href='http://fonts.googleapis.com/css?family=Inconsolata:400,700' rel='stylesheet' type='text/css'>
 
-        <!-- External scripts -->
-        <script src="externals/js/less.min.js"></script>
+        <!-- bower:css -->
+        <!-- endbower -->
 
         <!-- Nerve -->
-        <link href="css/nerve.css" rel="stylesheet">
-        <link href="css/ui.css" rel="stylesheet">
+        <link href="nerve.css" rel="stylesheet">
     </head>
 
     <body>
@@ -74,7 +70,9 @@
             <div class="tab-pane container" id="general"></div>
 
             <!-- CPU -->
-            <div class="tab-pane container" id="cpu"></div>
+            <div class="tab-pane container" id="cpu">
+                <nerve-cpu></nerve-cpu>
+            </div>
 
             <!-- GPU -->
             <div class="tab-pane container" id="gpu"></div>
@@ -95,12 +93,10 @@
             <p style="color: #666; font-weight: 300">&copy; Alexandro S&aacute;nchez Bach, 2014</p>
         </footer>
 
-        <!-- Externals -->
-        <script src="externals/js/jquery.min.js"></script>
-        <script src="externals/js/bootstrap.min.js"></script>
+        <!-- bower:js -->
+        <!-- endbower -->
 
         <!-- Nerve -->
-        <script src="js/ui.js"></script>
-        <script src="js/nerve.js"></script>
+        <script src="nerve.js"></script>
     </body>
 </html>
