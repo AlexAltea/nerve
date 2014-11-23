@@ -99,6 +99,22 @@
     padding: 3px;
     height: 36px;
     background-color: #ccc;
+    display: block;
+}
+.widget-toolbar > .widget-input {
+    float: left;
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 2px;
+}
+
+.widget-toolbar > .widget-input > * {
+    float: left;
+}
+
+.widget-toolbar > .widget-input > span {
+    width: 60px;
 }
 
 .widget-input > .form-control {

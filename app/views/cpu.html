@@ -8,11 +8,26 @@
     <div  class="widget-input btn-group btn-group-sm">
         <label class="btn-group-addon">Thread</label>
         <div id="nerve-cpu-threads-selector" class="btn-group btn-group-sm" role="group">
-            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                <i>Select thread</i> <span class="caret"></span>
+            <button ng-click="updateThreads()" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                <span ng-show="!threadCurrent">
+                    <i>Select thread</i> <span class="caret"></span>
+                </span>
+                <span ng-show="threadCurrent">
+                    ID #{{ threadCurrent.id }} <i> {{ threadCurrent.name ? '('+threadCurrent.name+')' : '' }} </i>
+                    <span class="label {{ (threadCurrent.type == 'PPU') ? 'label-default' : 'label-primary' }}" style="padding: 2px 4px; font-size: 9px">
+                        {{ threadCurrent.type }}
+                    </span> &nbsp; <span class='caret'></span>
+                </span>
             </button>
             <ul id="nerve-cpu-threads-list" class="dropdown-menu" role="menu">
-                <li><a>Loading...</a></li>
+                <li ng-click="setCurrentThread(thread)" ng-repeat="thread in threadList" class='nerve-cpu-threads-item'>
+                    <a href='#'>
+                        ID #{{ thread.id }} <i> {{ thread.name ? '('+thread.name+')' : '' }} </i>
+                        <span class="label {{ (thread.type == 'PPU') ? 'label-default' : 'label-primary' }}" style="padding: 2px 4px; font-size: 9px">
+                            {{ thread.type }}
+                        </span>
+                    </a>
+                </li>
             </ul>
         </div>
         <label class="btn btn-default">Run</label>
@@ -28,7 +43,7 @@
             <div class="widget-toolbar">
                 <div class="widget-input input-group input-group-sm">
                     <span class="input-group-addon">Address</span>
-                    <input type="text" class="form-control" ng-model="memory.addr" ng-maxlength="8" maxlength="8">
+                    <input ng-model="disasmAddressHex" type="text" class="form-control" ng-maxlength="8" maxlength="8">
                 </div>
             </div>
             <div class="widget-content">
@@ -45,17 +60,32 @@
         </div>
         <div class="widget">
             <div class="widget-title">Memory</div>
-            <div class="widget-toolbar">
+            <div class="input-toolbar widget-toolbar">
                 <div class="widget-input input-group input-group-sm">
                     <span class="input-group-addon">Address</span>
-                    <input type="text" class="form-control" ng-model="memory.addr" ng-maxlength="8" maxlength="8">
+                    <input ng-model="memoryAddressHex" type="text" class="form-control" ng-maxlength="8" maxlength="8">
+                </div>
+                <div class="widget-input input-group input-group-sm">
+                    <span class="input-group-addon">Width</span>
+                    <input ng-model="memoryWidth" type="number" class="form-control">
                 </div>
             </div>
             <div class="widget-content">
-                Test
+                <table>
+                    <tr ng-repeat="line in memoryLines">
+                        <td>{{ line.addr }}</td>
+                        <td ng-repeat="byteHex in line.bytesHex">
+                            {{ byteHex }}
+                        </td>
+                        <td ng-repeat="byteStr in line.bytesStr">
+                            {{ byteStr }}
+                        </td>
+                    </tr>
+                </table>
             </div>
         </div>
     </div>
+
     <div class="col-md-4">
         <div class="widget nerve-cpu-registers">
             <div class="widget-title">Registers</div>
@@ -150,7 +180,7 @@
             <div class="widget-toolbar">
                 <div class="widget-input input-group input-group-sm">
                     <span class="input-group-addon">Address</span>
-                    <input type="text" class="form-control" ng-model="memory.addr" ng-maxlength="8" maxlength="8">
+                    <input ng-model="stackAddressHex" type="text" class="form-control" ng-maxlength="8" maxlength="8">
                 </div>
             </div>
             <div class="widget-content">

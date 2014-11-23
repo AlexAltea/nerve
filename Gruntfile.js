@@ -8,7 +8,7 @@ module.exports = function (grunt) {
     // Time how long tasks take
     require('time-grunt')(grunt);
 
-    // Project configuration.
+    // Project configuration
     grunt.initConfig({
         yeoman: {
             app: 'app',
@@ -19,7 +19,7 @@ module.exports = function (grunt) {
                 expand: true,
                 filter: 'isFile',
                 cwd: '<%= yeoman.app %>/',
-                src: '**/*.html',
+                src: ['**/*.html', '**/*.jpg'],
                 dest: '<%= yeoman.dist %>/'
             }
         },
@@ -55,7 +55,7 @@ module.exports = function (grunt) {
                 files: [{
                     expand: true,
                     cwd: '<%= yeoman.dist %>',
-                    src: '**/*.html',
+                    src: '{,*/}*.html',
                     dest: '<%= yeoman.dist %>/'
                 }]
             }

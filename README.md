@@ -5,21 +5,22 @@ Nerve
 Front-end for PlayStation 3 debuggers. Please, understand that I'm not interested on providing support, releases, or attention to any comments, issues or pull requests for now.
 
 ### Deploy
-To build, clone the *master* branch of this repository, and run following commands on it:
+To build the Nerve client, clone the *master* branch of this repository, and do the following:
 
-Install the development and client dependencies:
+**1.** Install the development and client dependencies:
 ```
 npm install
 bower install
 ```
 
-Install the TypeScript definiton files from the dependencies:
+**2.** Install the TypeScript definiton files from the dependencies:
 ```
 tsd install angular
+tsd install bootstrap
 tsd install jquery
 ```
 
-Finally, build the app with:
+**3.** Finally, build the app with:
 ```
 grunt build
 ```

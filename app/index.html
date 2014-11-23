@@ -16,32 +16,38 @@
 
     <body>
         <!-- Navbar -->
-        <div class="navbar navbar-fixed-top" role="navigation">
-            <div class="container">
-                <div class="navbar-header pull-left">
-                    <ul class="nav navbar-nav">
-                        <li><a id="tab-intro" href="#intro" class="navbar-brand" role="tab" data-toggle="tab">NERVE</a></li>
-                        <li><a id="tab-general" href="#general" role="tab" data-toggle="tab">General</a></li>
-                        <li><a id="tab-cpu" href="#cpu" role="tab" data-toggle="tab">CPU</a></li>
-                        <li><a id="tab-gpu" href="#gpu" role="tab" data-toggle="tab">GPU</a></li>
-                        <li><a id="tab-memory" href="#memory" role="tab" data-toggle="tab">Memory</a></li>
-                        <li><a id="tab-files" href="#files" role="tab" data-toggle="tab">Files</a></li>
-                        <li><a id="tab-system" href="#system" role="tab" data-toggle="tab">System</a></li>
-                    </ul>
+        <div ng-controller="ServerController" class="navbar navbar-fixed-top" role="navigation">
+            <div class="navbar-header pull-left">
+                <ul class="nav navbar-nav">
+                    <li><a id="tab-intro" href="#intro" class="navbar-brand" role="tab" data-toggle="tab">NERVE</a></li>
+                    <li><a class="disabled" id="tab-general" href="#general" role="tab">General</a></li>
+                    <li><a class="{{ !connected ? 'disabled' : '' }}" data-toggle="{{ connected ? 'tab' : '' }}" id="tab-cpu" href="#cpu" role="tab">CPU</a></li>
+                    <li><a class="disabled" id="tab-gpu" href="#gpu" role="tab">GPU</a></li>
+                    <li><a class="disabled" id="tab-memory" href="#memory" role="tab">Memory</a></li>
+                    <li><a class="disabled" id="tab-files" href="#files" role="tab">Files</a></li>
+                    <li><a class="disabled" id="tab-system" href="#system" role="tab">System</a></li>
+                </ul>
+            </div>
+            <div class="navbar-header pull-right">
+                <form ng-show="!connected" ng-submit="connect(customServer)" class="navbar-form">
+                    <input ng-model="customServer" name="server" type="text" placeholder="Server" class="form-control">
+                    <button id="nerve-server-btn" type="submit" class="btn btn-success">
+                        <div ng-show="!connecting">Connect</div>
+                        <div ng-show="connecting" class="loader">Loading...</div>
+                    </button>
+                </form>
+                <div ng-show="connected" id="nerve-server-status" class="navbar-nav" data-toggle="tooltip" data-placement="bottom" title="
+                    <table style='text-align: left'>
+                        <tr><td style='width: 50px;'></td><td></td></tr>
+                        <tr><td>Device:</td><td>{{ serverInfo.device.name }} ({{ serverInfo.device.version }})</td></tr>
+                        <tr><td>Host:</td><td>{{ serverInfo.host.os }} ({{ serverInfo.host.cpu }})</td></tr>
+                    </table>
+                ">
+                    Connected to: <i>{{ serverAddress }}</i>
                 </div>
-                <div class="navbar-header pull-right">
-                    <form id="nerve-server-form" class="navbar-form">
-                        <input id="nerve-server-addr" name="server" type="text" placeholder="Server" class="form-control">
-                        <button id="nerve-server-btn" type="submit" class="btn btn-success">
-                            Connect
-                        </button>
-                    </form>
-                    <div id="nerve-server-status" class="navbar-nav" data-toggle="tooltip" data-placement="bottom">
-                    </div>
-                    <ul id="nerve-server-actions" class="nav navbar-nav" style="display: none">
-                        <li><a href="#" onclick="Nerve.disconnect()"><span class="glyphicon glyphicon-off"></span></a></li>
-                    </ul>
-                </div>
+                <ul ng-show="connected" id="nerve-server-actions" class="nav navbar-nav">
+                    <li><a href="#" ng-click="disconnect()"><span class="glyphicon glyphicon-off"></span></a></li>
+                </ul>
             </div>
         </div>
 
@@ -63,28 +69,72 @@
 
         <!-- Main container -->
         <div class="tab-content">
-            <!-- Nerve -->
-            <div class="tab-pane active" id="intro"></div>
+
+            <!-- Intro -->
+            <div class="tab-pane active" id="intro">
+                <div class="jumbotron">
+                    <div class="container">
+                        <h1>Nerve</h1>
+                        <p>An online front-end for PlayStation 3 debuggers.</p>
+                    </div>
+                </div>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <h2>Connection</h2>
+                            <p>Enter the address of the debugger back-end server in the top right corner. All interaction with the device goes through the RESTful API the back-end server offers. More information at: <a href="http://docs.nerve.apiary.io/">Nerve API documentation</a>.</p>
+                            <p>Remember to enter the server's address in the <b>IP:Port</b> format (e.g. <i>127.0.0.1:8080</i>). A mock server is available at:</p>
+                            <p><code>private-26787-nerve.apiary-mock.com</code></p>
+                        </div>
+                        <div class="col-md-4">
+                            <h2>Features</h2>
+                            <p>At the moment, Nerve is far from finished and the only back-end available for it is the PS3 emulator <a href="https://github.com/AlexAltea/nucleus">Nucleus</a>. These are the offered debugging features:</p>
+                            <ul>
+                                <li>Nothing!</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-4">
+                            <h2>Goals</h2>
+                            <p>For receiving news about Nerve and accessing its source code and API documentation, visit <a href="https://github.com/AlexAltea/nerve">Nerve's repo</a>. These are the features I have planned:</p>
+                            <ul>
+                                <li>PPU debugger</li>
+                                <li>Memory viewer</li>
+                                <li>LV2 kernel explorer</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
             <!-- General -->
-            <div class="tab-pane container" id="general"></div>
+            <div class="tab-pane container" id="general">
+                <nerve-general></nerve-general>
+            </div>
 
             <!-- CPU -->
-            <div class="tab-pane container" id="cpu">
+            <div class="tab-pane" id="cpu">
                 <nerve-cpu></nerve-cpu>
             </div>
 
             <!-- GPU -->
-            <div class="tab-pane container" id="gpu"></div>
+            <div class="tab-pane" id="gpu">
+                <nerve-gpu></nerve-gpu>
+            </div>
 
             <!-- Memory -->
-            <div class="tab-pane container" id="memory"></div>
+            <div class="tab-pane" id="memory">
+                <nerve-memory></nerve-memory>
+            </div>
 
             <!-- Files -->
-            <div class="tab-pane container" id="files"></div>
+            <div class="tab-pane" id="files">
+                <nerve-files></nerve-files>
+            </div>
 
             <!-- System -->
-            <div class="tab-pane container" id="system"></div>
+            <div class="tab-pane" id="system">
+                <nerve-system></nerve-system>
+            </div>
         </div>
 
         <hr/>
