@@ -20,10 +20,11 @@ interface INerveCpuController extends ng.IScope {
     disasmAddressHex: string;
 
     // Memory
-    memoryAddress: number;
-    memoryAddressHex: string;
-    memoryWidth: number;
-    memoryHeight: number;
+    memAddress: number;
+    memAddressHex: string;
+    memWidth: number;
+    memHeight: number;
+    memLines: any;
 
     // Stack
     stackAddress: number;
@@ -67,14 +68,28 @@ class NerveCpuController {
         });
 
         // Memory
-        $scope.memoryWidth = 16;
-        $scope.memoryAddress = 0x10000;
-        $scope.$watch('memoryAddress', () => {
-            $scope.memoryAddressHex = convertNumberToHex($scope.memoryAddress);
+        $scope.memWidth = 16;
+        $scope.memHeight = 12;
+        $scope.memAddress = 0x10000;
+        $scope.$watch('memAddress', () => {
+            $scope.memAddressHex = convertNumberToHex($scope.memAddress);
+            $scope.memLines = [];
+
+            // Update content of memory panel
+            var start = $scope.memAddress;
+            var end = $scope.memAddress + $scope.memWidth * $scope.memWidth;
+            var step = $scope.memWidth;
+            for (var line = start; line < end; line += step) {
+                $scope.memLines.push({
+                    addr: convertNumberToHex(line),
+                    bytesHex: Array.apply(null, new Array($scope.memWidth)).map(String.prototype.valueOf, 'FF'),
+                    bytesStr: Array.apply(null, new Array($scope.memWidth)).map(String.prototype.valueOf, '.'),
+                });
+            }
         });
-        $scope.$watch('memoryAddressHex', () => {
-            if ($scope.memoryAddressHex.length == 8) {
-                $scope.memoryAddress = convertHexToNumber($scope.memoryAddressHex);
+        $scope.$watch('memAddressHex', () => {
+            if ($scope.memAddressHex.length == 8) {
+                $scope.memAddress = convertHexToNumber($scope.memAddressHex);
             }
         });
 

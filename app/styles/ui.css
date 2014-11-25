@@ -124,6 +124,13 @@
 }
 
 .widget-content {
-    padding: 5px;
+    padding: 5px 10px;
     background-color: #eee;
 }
+
+.widget-content .monospaced {
+    font-family: 'Inconsolata';
+    font-size: 14px;
+    width: 80px;
+}
+

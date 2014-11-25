@@ -1,9 +1,10 @@
-# NPM and TSD dependencies
+# Visual Studio
+*.sln
+*.suo
+
+# Dependencies NPM and TSD
 node_modules/
 typings/
-
-# AngularJS
-*.map
 
 # Images
 *.psd

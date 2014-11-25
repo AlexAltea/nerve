@@ -63,23 +63,23 @@
             <div class="input-toolbar widget-toolbar">
                 <div class="widget-input input-group input-group-sm">
                     <span class="input-group-addon">Address</span>
-                    <input ng-model="memoryAddressHex" type="text" class="form-control" ng-maxlength="8" maxlength="8">
+                    <input ng-model="memAddressHex" type="text" class="form-control" ng-maxlength="8" maxlength="8">
                 </div>
                 <div class="widget-input input-group input-group-sm">
                     <span class="input-group-addon">Width</span>
-                    <input ng-model="memoryWidth" type="number" class="form-control">
+                    <input ng-model="memWidth" type="number" class="form-control">
+                </div>
+                <div class="widget-input input-group input-group-sm">
+                    <span class="input-group-addon">Height</span>
+                    <input ng-model="memHeight" type="number" class="form-control">
                 </div>
             </div>
             <div class="widget-content">
-                <table>
-                    <tr ng-repeat="line in memoryLines">
-                        <td>{{ line.addr }}</td>
-                        <td ng-repeat="byteHex in line.bytesHex">
-                            {{ byteHex }}
-                        </td>
-                        <td ng-repeat="byteStr in line.bytesStr">
-                            {{ byteStr }}
-                        </td>
+                <table class="monospaced">
+                    <tr ng-repeat="line in memLines">
+                        <td style="padding-right: 10px; color: #666">{{ line.addr }}</td>
+                        <td style="padding-right: 5px" ng-repeat="byteHex in line.bytesHex track by $index">{{ byteHex }}</td>
+                        <td ng-repeat="byteStr in line.bytesStr track by $index">{{ byteStr }}</td>
                     </tr>
                 </table>
             </div>
