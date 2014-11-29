@@ -80,14 +80,14 @@ body {
  */
 .nerve-cpu-disassembler td {
     font-family: 'Inconsolata';
-    font-size: 12px;
+    font-size: 14px;
     padding-left: 10px;
     margin: 10px;
 }
 
 .nerve-cpu-registers td {
     font-family: 'Inconsolata';
-    font-size: 12px;
+    font-size: 14px;
     padding-left: 10px;
     margin: 10px;
 }

@@ -16,6 +16,7 @@ bower install
 **2.** Install the TypeScript definiton files from the dependencies:
 ```
 tsd install angular
+tsd install angular-resource
 tsd install bootstrap
 tsd install jquery
 ```

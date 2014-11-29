@@ -60,6 +60,18 @@ module.exports = function (grunt) {
                 }]
             }
         },
+        uglify: {
+            dist: {
+                options: {
+                    mangle: false
+                },
+                files: {
+                    '<%= yeoman.dist %>/nerve.js': [
+                        '<%= yeoman.dist %>/nerve.js'
+                    ]
+                }
+            }
+        },
         connect: {
             options: {
                 port: 9000,
@@ -108,7 +120,8 @@ module.exports = function (grunt) {
         'wiredep',
         'typescript',
         'cssmin',
-        'htmlmin'
+        'htmlmin',
+        'uglify'
     ]);
     grunt.registerTask('serve', [
         'connect',

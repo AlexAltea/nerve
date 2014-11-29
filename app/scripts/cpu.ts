@@ -3,14 +3,7 @@
  * Released under GPL v2 license. Read LICENSE for more details.
  */
 
-interface IThread {
-    id: number;
-    type: string;
-    name: string;
-    state: string;
-}
-
-interface INerveCpuController extends ng.IScope {
+interface INerveCpuControllerScope extends ng.IScope {
     // Threading
     threadList: IThread[];
     threadCurrent: IThread;
@@ -25,6 +18,12 @@ interface INerveCpuController extends ng.IScope {
     memWidth: number;
     memHeight: number;
     memLines: any;
+    memPagePrev: IMemoryPage;
+    memPageCur: IMemoryPage;
+    memPageNext: IMemoryPage;
+
+    // Registers
+    regMode: string;
 
     // Stack
     stackAddress: number;
@@ -34,22 +33,19 @@ interface INerveCpuController extends ng.IScope {
     setCurrentThread(IThread);
 }
 
+/**
+ * CPU controller
+ */
 class NerveCpuController {
-    public static $inject = ['$scope', '$server'];
+    public static $inject = ['$scope', '$server', 'ThreadResource'];
     
-    constructor($scope: INerveCpuController, $server: IServerProvider) {
+    constructor($scope: INerveCpuControllerScope, $server: IServerProvider, Thread: IThreadResource) {
         $scope.threadCurrent = undefined;
 
         // Update the list of threads
         $scope.updateThreads = () => {
-            $server.get('/cpu/threads', (resp) => {
-                console.log("Update Threads: Success");
-                $scope.threadList = resp;
-            }, (err) => {
-                    console.log("Update Threads: Error");
-                    $scope.threadList = undefined;
-                });
-        };
+            $scope.threadList = Thread.query();
+        }
 
         // Set current thread
         $scope.setCurrentThread = (thread: IThread) => {
@@ -79,9 +75,10 @@ class NerveCpuController {
             var start = $scope.memAddress;
             var end = $scope.memAddress + $scope.memWidth * $scope.memWidth;
             var step = $scope.memWidth;
+
             for (var line = start; line < end; line += step) {
                 $scope.memLines.push({
-                    addr: convertNumberToHex(line),
+                    addr: line,
                     bytesHex: Array.apply(null, new Array($scope.memWidth)).map(String.prototype.valueOf, 'FF'),
                     bytesStr: Array.apply(null, new Array($scope.memWidth)).map(String.prototype.valueOf, '.'),
                 });
@@ -92,6 +89,9 @@ class NerveCpuController {
                 $scope.memAddress = convertHexToNumber($scope.memAddressHex);
             }
         });
+
+        // Registers
+        $scope.regMode = 'Integer';
 
         // Stack
         $scope.stackAddress = 0xD0001000;

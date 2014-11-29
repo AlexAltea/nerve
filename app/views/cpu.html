@@ -1,11 +1,11 @@
-<div class="btn-toolbar widget-toolbar">
+<nui-toolbar>
     <div class="widget-input btn-group btn-group-sm">
         <label class="btn-group-addon">Cell</label>
         <label class="btn btn-default">Run</label>
         <label class="btn btn-default">Stop</label>
         <label class="btn btn-default">Restart</label>
     </div>
-    <div  class="widget-input btn-group btn-group-sm">
+    <div class="widget-input btn-group btn-group-sm">
         <label class="btn-group-addon">Thread</label>
         <div id="nerve-cpu-threads-selector" class="btn-group btn-group-sm" role="group">
             <button ng-click="updateThreads()" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
@@ -34,18 +34,18 @@
         <label class="btn btn-default">Stop</label>
         <label class="btn btn-default">Restart</label>
     </div>
-</div>
+</nui-toolbar>
 
 <div>
     <div class="col-md-8">
         <div class="widget nerve-cpu-disassembler">
             <div class="widget-title">Disassembler</div>
-            <div class="widget-toolbar">
+            <nui-toolbar>
                 <div class="widget-input input-group input-group-sm">
                     <span class="input-group-addon">Address</span>
                     <input ng-model="disasmAddressHex" type="text" class="form-control" ng-maxlength="8" maxlength="8">
                 </div>
-            </div>
+            </nui-toolbar>
             <div class="widget-content">
                 <table>
                     <tr data-ng-repeat="line in disassembler.lines()">
@@ -60,7 +60,7 @@
         </div>
         <div class="widget">
             <div class="widget-title">Memory</div>
-            <div class="input-toolbar widget-toolbar">
+            <nui-toolbar>
                 <div class="widget-input input-group input-group-sm">
                     <span class="input-group-addon">Address</span>
                     <input ng-model="memAddressHex" type="text" class="form-control" ng-maxlength="8" maxlength="8">
@@ -73,11 +73,11 @@
                     <span class="input-group-addon">Height</span>
                     <input ng-model="memHeight" type="number" class="form-control">
                 </div>
-            </div>
+            </nui-toolbar>
             <div class="widget-content">
                 <table class="monospaced">
                     <tr ng-repeat="line in memLines">
-                        <td style="padding-right: 10px; color: #666">{{ line.addr }}</td>
+                        <td style="padding-right: 10px; color: #666">{{ line.addr | hexadecimal }}</td>
                         <td style="padding-right: 5px" ng-repeat="byteHex in line.bytesHex track by $index">{{ byteHex }}</td>
                         <td ng-repeat="byteStr in line.bytesStr track by $index">{{ byteStr }}</td>
                     </tr>
@@ -89,15 +89,15 @@
     <div class="col-md-4">
         <div class="widget nerve-cpu-registers">
             <div class="widget-title">Registers</div>
-            <div class="widget-toolbar">
-                <div class="widget-input btn-group btn-group-sm">
-                    <label class="btn btn-default active">Integer</label>
-                    <label class="btn btn-default">Float</label>
-                    <label class="btn btn-default">Vector</label>
-                </div>
-            </div>
+            <nui-toolbar>
+                <nui-radio-group ng-model="$parent.regMode">
+                    <nui-radio ng-value="Integer">Integer</nui-radio>
+                    <nui-radio ng-value="Float">Float</nui-radio>
+                    <nui-radio ng-value="Vector">Vector</nui-radio>
+                </nui-radio-group>
+            </nui-toolbar>
             <div class="widget-content">
-                <div id="nerve-cpu-registers-integer">
+                <div id="nerve-cpu-registers-integer" ng-show="regMode == 'Integer'">
                     <table>
                         <tr><td> r0</td><td>????????????????</td><td>r16</td><td>????????????????</td></tr>
                         <tr><td> r1</td><td>????????????????</td><td>r17</td><td>????????????????</td></tr>
@@ -117,7 +117,7 @@
                         <tr><td>r15</td><td>????????????????</td><td>r31</td><td>????????????????</td></tr>
                     </table>
                 </div>
-                <div id="nerve-cpu-registers-float">
+                <div id="nerve-cpu-registers-float" ng-show="regMode == 'Float'">
                     <table>
                         <tr><td> fr0</td><td>????????????????</td><td>fr16</td><td>????????????????</td></tr>
                         <tr><td> fr1</td><td>????????????????</td><td>fr17</td><td>????????????????</td></tr>
@@ -137,7 +137,7 @@
                         <tr><td>fr15</td><td>????????????????</td><td>fr31</td><td>????????????????</td></tr>
                     </table>
                 </div>
-                <div id="nerve-cpu-registers-vector">
+                <div id="nerve-cpu-registers-vector" ng-show="regMode == 'Vector'">
                     <table>
                         <tr><td> vr0</td><td>???????? ???????? ???????? ????????</td>
                         <tr><td> vr1</td><td>???????? ???????? ???????? ????????</td>
@@ -177,12 +177,12 @@
         </div>
         <div class="widget">
             <div class="widget-title">Stack</div>
-            <div class="widget-toolbar">
+            <nui-toolbar>
                 <div class="widget-input input-group input-group-sm">
                     <span class="input-group-addon">Address</span>
                     <input ng-model="stackAddressHex" type="text" class="form-control" ng-maxlength="8" maxlength="8">
                 </div>
-            </div>
+            </nui-toolbar>
             <div class="widget-content">
                 Test
             </div>

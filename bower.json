@@ -11,7 +11,8 @@
     "url": "https://github.com/AlexAltea/nerve.git"
   },
   "dependencies": {
-    "angular": "^1.3.0",
+    "angular": "^1.3.3",
+    "angular-resource": "^1.3.3",
     "bootstrap": "^3.2.0"
   },
   "devDependencies": {},
