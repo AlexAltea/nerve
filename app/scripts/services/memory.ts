@@ -4,7 +4,8 @@
  */
 
 interface IMemoryPage extends ng.resource.IResource<IMemoryPage> {
-    addr: number;
+    address: number;
+    size: number;
     data: string;
 }
 
@@ -12,5 +13,5 @@ interface IMemoryPageResource extends ng.resource.IResourceClass<IMemoryPage> {
 }
 
 function MemoryPageResource($resource: ng.resource.IResourceService, $server: ServerProvider) {
-    return <IMemoryPageResource> $resource($server.getAddress() + '/memory/:addr', { addr: '@addr' });
+    return <IMemoryPageResource> $resource($server.getAddress() + '/memory/:address', { address: '@address' });
 }

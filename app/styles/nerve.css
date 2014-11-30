@@ -31,6 +31,11 @@
     background: #5D5F60;
 }
 
+/* TODO: Remove once we get rid of Bootstrap's :focus changes */
+.nav > li > a:focus {
+    background: #3C3F41;
+}
+
 .nav > li > .disabled {
     color: #888;
     cursor: default;

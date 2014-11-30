@@ -53,6 +53,7 @@ nerve.config(['$routeProvider', ($routeProvider) => {
 
 // Services
 nerve.factory('$server', ($http) => new ServerProvider($http));
+nerve.factory('MemoryPageResource', MemoryPageResource);
 
 // Factories
 nerve.factory('ThreadResource', ThreadResource);

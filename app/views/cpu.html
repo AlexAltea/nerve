@@ -77,8 +77,10 @@
             <div class="widget-content">
                 <table class="monospaced">
                     <tr ng-repeat="line in memLines">
-                        <td style="padding-right: 10px; color: #666">{{ line.addr | hexadecimal }}</td>
-                        <td style="padding-right: 5px" ng-repeat="byteHex in line.bytesHex track by $index">{{ byteHex }}</td>
+                        <td style="color: #666">{{ line.addr | hexadecimal }}</td>
+                        <td style="padding-right: 10px"></td>
+                        <td style="padding-right:  5px" ng-repeat="byteHex in line.bytesHex track by $index">{{ byteHex }}</td>
+                        <td style="padding-right:  5px"></td>
                         <td ng-repeat="byteStr in line.bytesStr track by $index">{{ byteStr }}</td>
                     </tr>
                 </table>

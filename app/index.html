@@ -20,12 +20,12 @@
             <div class="navbar-header pull-left">
                 <ul class="nav navbar-nav">
                     <li><a id="tab-intro" href="#/" class="navbar-brand">NERVE</a></li>
-                    <li><a class="disabled" href="#/general">General</a></li>
+                    <li><a class="{{ !connected ? 'disabled' : '' }}" href="#/general">General</a></li>
                     <li><a class="{{ !connected ? 'disabled' : '' }}" href="#/cpu">CPU</a></li>
-                    <li><a class="disabled" href="#/gpu">GPU</a></li>
-                    <li><a class="disabled" href="#/memory">Memory</a></li>
-                    <li><a class="disabled" href="#/files">Files</a></li>
-                    <li><a class="disabled" href="#/system">System</a></li>
+                    <li><a class="{{ !connected ? 'disabled' : '' }}" href="#/gpu">GPU</a></li>
+                    <li><a class="{{ !connected ? 'disabled' : '' }}" href="#/memory">Memory</a></li>
+                    <li><a class="{{ !connected ? 'disabled' : '' }}" href="#/files">Files</a></li>
+                    <li><a class="{{ !connected ? 'disabled' : '' }}" href="#/system">System</a></li>
                 </ul>
             </div>
             <div class="navbar-header pull-right">
