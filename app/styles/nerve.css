@@ -51,6 +51,10 @@ body {
     font-size: 16px;
 }
 
+a {
+    cursor: pointer;
+}
+
 /**
  * Jumbotron
  */

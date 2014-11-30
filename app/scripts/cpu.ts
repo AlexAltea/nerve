@@ -105,9 +105,3 @@ class NerveCpuController {
         });
     }
 }
-
-class NerveCpuDirective implements ng.IDirective {
-    restrict = 'E';
-    templateUrl = 'views/cpu.html';
-    controller = NerveCpuController;
-}

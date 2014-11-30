@@ -21,7 +21,7 @@
             </button>
             <ul id="nerve-cpu-threads-list" class="dropdown-menu" role="menu">
                 <li ng-click="setCurrentThread(thread)" ng-repeat="thread in threadList" class='nerve-cpu-threads-item'>
-                    <a href='#'>
+                    <a>
                         ID #{{ thread.id }} <i> {{ thread.name ? '('+thread.name+')' : '' }} </i>
                         <span class="label {{ (thread.type == 'PPU') ? 'label-default' : 'label-primary' }}" style="padding: 2px 4px; font-size: 9px">
                             {{ thread.type }}
@@ -43,7 +43,7 @@
             <nui-toolbar>
                 <div class="widget-input input-group input-group-sm">
                     <span class="input-group-addon">Address</span>
-                    <input ng-model="disasmAddressHex" type="text" class="form-control" ng-maxlength="8" maxlength="8">
+                    <input ng-model="$parent.disasmAddressHex" type="text" class="form-control" ng-maxlength="8" maxlength="8">
                 </div>
             </nui-toolbar>
             <div class="widget-content">
@@ -63,15 +63,15 @@
             <nui-toolbar>
                 <div class="widget-input input-group input-group-sm">
                     <span class="input-group-addon">Address</span>
-                    <input ng-model="memAddressHex" type="text" class="form-control" ng-maxlength="8" maxlength="8">
+                    <input ng-model="$parent.memAddressHex" type="text" class="form-control" ng-maxlength="8" maxlength="8">
                 </div>
                 <div class="widget-input input-group input-group-sm">
                     <span class="input-group-addon">Width</span>
-                    <input ng-model="memWidth" type="number" class="form-control">
+                    <input ng-model="$parent.memWidth" type="number" class="form-control">
                 </div>
                 <div class="widget-input input-group input-group-sm">
                     <span class="input-group-addon">Height</span>
-                    <input ng-model="memHeight" type="number" class="form-control">
+                    <input ng-model="$parent.memHeight" type="number" class="form-control">
                 </div>
             </nui-toolbar>
             <div class="widget-content">
@@ -180,7 +180,7 @@
             <nui-toolbar>
                 <div class="widget-input input-group input-group-sm">
                     <span class="input-group-addon">Address</span>
-                    <input ng-model="stackAddressHex" type="text" class="form-control" ng-maxlength="8" maxlength="8">
+                    <input ng-model="$parent.stackAddressHex" type="text" class="form-control" ng-maxlength="8" maxlength="8">
                 </div>
             </nui-toolbar>
             <div class="widget-content">
