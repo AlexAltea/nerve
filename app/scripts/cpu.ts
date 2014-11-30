@@ -11,6 +11,9 @@ interface INerveCpuControllerScope extends ng.IScope {
     // Disassembler
     disasmAddress: number;
     disasmAddressHex: string;
+    disasmHeight: number;
+    disasmCache: IMemoryPage[];
+    disasmLines: any;
 
     // Memory
     memAddress: number;
@@ -29,6 +32,7 @@ interface INerveCpuControllerScope extends ng.IScope {
     stackCache: IMemoryPage[];
 
     updateThreads();
+    updateDisassembler();
     updateMemory();
     setCurrentThread(IThread);
 }
@@ -60,19 +64,29 @@ class NerveCpuController {
         };
 
         // Disassembler
+        $scope.disasmHeight = 10;
         $scope.disasmAddress = 0x10200;
+        $scope.disasmCache = [];
+        $scope.disasmLines = [];
+
         $scope.$watch('disasmAddress', () => {
             $scope.disasmAddressHex = convertNumberToHex($scope.disasmAddress);
+            this.updateMemoryCache($scope.disasmAddress, $scope.disasmCache);
+            $scope.updateMemory();
         });
         $scope.$watch('disasmAddressHex', () => {
             if ($scope.disasmAddressHex.length == 8) {
                 $scope.disasmAddress = convertHexToNumber($scope.disasmAddressHex);
             }
         });
+        $scope.$watch('disasmCache', () => {
+            $scope.updateDisassembler();
+        }, true);
+
 
         // Memory
         $scope.memWidth = 16;
-        $scope.memHeight = 12;
+        $scope.memHeight = 10;
         $scope.memAddress = 0x10000;
         $scope.memCache = [];
         $scope.memLines = [];
@@ -96,6 +110,33 @@ class NerveCpuController {
                 $scope.memAddress = convertHexToNumber($scope.memAddressHex);
             }
         });
+
+
+        // Update content of disassembler panel
+        $scope.updateDisassembler = () => {
+            var start = $scope.disasmAddress;
+            var end = $scope.disasmAddress + 4 * $scope.disasmHeight;
+
+            $scope.disasmLines = [];
+            for (var addr = start; addr < end; addr += 4) {
+                for (var i = 0; i < $scope.disasmCache.length; i++) {
+                    if (!$scope.disasmCache[i]) {
+                        return;
+                    }
+                    if ($scope.disasmCache[i].address <= addr && addr < $scope.disasmCache[i].address + $scope.disasmCache[i].size) {
+                        var bytes = $scope.disasmCache[i].data.substring(
+                            (addr - $scope.disasmCache[i].address) * 2,
+                            (addr - $scope.disasmCache[i].address + 4) * 2
+                        );
+                        $scope.disasmLines.push({
+                            addr: addr,
+                            value: convertHexToNumber(bytes)
+                        });
+                        break;
+                    }
+                }
+            }
+        };
 
         // Update content of memory panel
         $scope.updateMemory = () => {

@@ -90,8 +90,6 @@ a {
 .nerve-cpu-disassembler td {
     font-family: 'Inconsolata';
     font-size: 14px;
-    padding-left: 10px;
-    margin: 10px;
 }
 
 .nerve-cpu-registers td {
@@ -100,6 +98,3 @@ a {
     padding-left: 10px;
     margin: 10px;
 }
-
-
-

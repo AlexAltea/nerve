@@ -47,13 +47,13 @@
                 </div>
             </nui-toolbar>
             <div class="widget-content">
-                <table>
-                    <tr data-ng-repeat="line in disassembler.lines()">
-                        <td>{{ line.breakpoint }}</td>
-                        <td>{{ line.addr }}</td>
-                        <td>{{ line.value }}</td>
-                        <td>{{ line.instruction }}</td>
-                        <td>{{ line.comment }}</td>
+                <table class="monospaced">
+                    <tr data-ng-repeat="line in disasmLines">
+                        <td style="color: #666">{{ line.addr | hexadecimal }}</td>
+                        <td style="padding-right: 10px"></td>
+                        <td>{{ line.value | hexadecimal }}</td>
+                        <td style="padding-right: 10px"></td>
+                        <td>{{ line.value | ppu:line.addr }}</td>
                     </tr>
                 </table>
             </div>
