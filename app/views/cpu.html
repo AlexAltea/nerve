@@ -48,12 +48,14 @@
             </nui-toolbar>
             <div class="widget-content">
                 <table class="monospaced">
-                    <tr data-ng-repeat="line in disasmLines">
-                        <td style="color: #666">{{ line.addr | hexadecimal }}</td>
+                    <tr data-ng-repeat="line in disasmLines track by $index">
+                        <td style="color: #666">{{ line.address | hexadecimal }}</td>
                         <td style="padding-right: 10px"></td>
-                        <td>{{ line.value | hexadecimal }}</td>
-                        <td style="padding-right: 10px"></td>
-                        <td>{{ line.value | ppu:line.addr }}</td>
+                        <td><span ng-repeat="byte in line.bytes track by $index">{{ byte | hexadecimal:2 }}</span></td>
+                        <td style="padding-right: 20px;"></td>
+                        <td>{{ line.mnemonic }}</td>
+                        <td style="padding-right: 30px;"></td>
+                        <td>{{ line.op_str }}</td>
                     </tr>
                 </table>
             </div>

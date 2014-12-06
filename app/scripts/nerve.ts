@@ -64,7 +64,6 @@ nerve.controller('NerveCpuController', NerveCpuController);
 
 // Filters
 nerve.filter('hexadecimal', HexadecimalFilter);
-nerve.filter('ppu', PPUFilter);
 
 /**
  * Nerve UI

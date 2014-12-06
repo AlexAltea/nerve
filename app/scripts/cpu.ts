@@ -3,6 +3,11 @@
  * Released under GPL v2 license. Read LICENSE for more details.
  */
 
+// Capstone.JS disassemblers
+declare var capstone: any;
+var csPPU = new capstone.Cs(capstone.ARCH_PPC, capstone.MODE_64 | capstone.MODE_BIG_ENDIAN);
+//var csSPU = new capstone.Cs(capstone.ARCH_SPU, capstone.MODE_64 | capstone.MODE_BIG_ENDIAN);
+
 interface INerveCpuControllerScope extends ng.IScope {
     // Threading
     threadList: IThread[];
@@ -117,25 +122,38 @@ class NerveCpuController {
             var start = $scope.disasmAddress;
             var end = $scope.disasmAddress + 4 * $scope.disasmHeight;
 
-            $scope.disasmLines = [];
+            var disasmLines = [];
             for (var addr = start; addr < end; addr += 4) {
                 for (var i = 0; i < $scope.disasmCache.length; i++) {
                     if (!$scope.disasmCache[i]) {
                         return;
                     }
                     if ($scope.disasmCache[i].address <= addr && addr < $scope.disasmCache[i].address + $scope.disasmCache[i].size) {
-                        var bytes = $scope.disasmCache[i].data.substring(
-                            (addr - $scope.disasmCache[i].address) * 2,
-                            (addr - $scope.disasmCache[i].address + 4) * 2
-                        );
-                        $scope.disasmLines.push({
-                            addr: addr,
-                            value: convertHexToNumber(bytes)
-                        });
+                        var buffer = [];
+                        for (var byteIndex = 0; byteIndex < 4; byteIndex++) {
+                            var byte = $scope.disasmCache[i].data.substr(
+                                (addr - $scope.disasmCache[i].address + byteIndex) * 2,
+                                2
+                            );
+                            buffer.push(parseInt(byte, 16));
+                        }
+
+                        var instruction = csPPU.disasm(buffer, addr);
+                        if (!!instruction[0]) {
+                            disasmLines.push(instruction[0]);
+                        } else {
+                            disasmLines.push({
+                                address: addr,
+                                bytes: buffer,
+                                mnemonic: '???',
+                                op_str: ''
+                            });
+                        }
                         break;
                     }
                 }
             }
+            $scope.disasmLines = disasmLines;
         };
 
         // Update content of memory panel
