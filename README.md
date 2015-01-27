@@ -11,17 +11,10 @@ To build the Nerve client, clone the *master* branch of this repository, and do 
 ```
 npm install
 bower install
+tsd reinstall
 ```
 
-**2.** Install the TypeScript definiton files from the dependencies:
-```
-tsd install angular
-tsd install angular-resource
-tsd install bootstrap
-tsd install jquery
-```
-
-**3.** Finally, build the app with:
+**2.** Finally, build the app with:
 ```
 grunt build
 ```
