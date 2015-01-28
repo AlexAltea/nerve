@@ -1,0 +1,4 @@
+# Allow external scripts not available in Bower
+!externals
+externals/*
+!externals/capstone/

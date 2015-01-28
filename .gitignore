@@ -11,8 +11,4 @@ typings/
 
 # Nerve
 dist/*
-
-# External scripts not available in Bower
-!dist/externals
-dist/externals/*
-!dist/externals/capstone/
+!dist/.gitignore
